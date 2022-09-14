@@ -58,11 +58,9 @@ done
 
 set -- "${ARGS[@]}"
 
-OVERLAP=$(dirname $2)
-RELATIVE=
-while [ "${1#$OVERLAP}" = "$1" ]; do
-  OVERLAP=$(dirname $OVERLAP)
-  RELATIVE="../${RELATIVE}"
-done
+CURDIR=$(cd $(dirname $0) && pwd)
+DIRECTORY=$(dirname $2)
+FILENAME=$(basename $2)
+RELATIVE=$($CURDIR/relative $1 ${DIRECTORY})
 
-cd $(dirname $2) && ln ${OPTIONS} ${RELATIVE}${1#$OVERLAP/} $(basename $2)
+cd ${DIRECTORY} && ln ${OPTIONS} ${RELATIVE} ${FILENAME}
