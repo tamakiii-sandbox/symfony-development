@@ -1,0 +1,10 @@
+version: "3.9"
+services:
+  php:
+    build:
+      context: .
+      args:
+        VERSION: ${VERSION:-81}
+    working_dir: /app/dependency/tamakiii-sandbox/init-symfony
+    volumes:
+      - .:/app:${MOUNT_TYPE:-delegated}
