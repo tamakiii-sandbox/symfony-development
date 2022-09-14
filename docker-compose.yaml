@@ -5,6 +5,6 @@ services:
       context: .
       args:
         VERSION: ${VERSION:-81}
-    working_dir: /app/dependency/tamakiii-sandbox/init-symfony
+    working_dir: /app/tamakiii-sandbox/init-symfony
     volumes:
-      - .:/app:${MOUNT_TYPE:-delegated}
+      - ./dependency/tamakiii-sandbox/init-symfony:/app/tamakiii-sandbox/init-symfony:${MOUNT_TYPE:-delegated}

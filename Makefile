@@ -1,16 +1,18 @@
-.PHONY: help install clean
+.PHONY: help setup install clean
 
 VERSION := 2.7
 
 help:
 	@cat $(firstword $(MAKEFILE_LIST))
 
-install: \
+setup: \
 	dependency/cellar/tamakiii-sandbox/init-symfony-$(VERSION) \
 	dependency/tamakiii-sandbox/init-symfony
 
+install:
+
 dependency/tamakiii-sandbox/init-symfony: dependency/cellar/tamakiii-sandbox/init-symfony-$(VERSION) | dependency/tamakiii-sandbox
-	ln -s $< $@
+	bin/ln $< $@
 
 dependency/cellar/tamakiii-sandbox/init-symfony-$(VERSION): | dependency/cellar/tamakiii-sandbox
 	git clone git@github.com:$(notdir $|)/$(notdir $@).git $@
