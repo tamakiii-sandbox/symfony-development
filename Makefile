@@ -12,7 +12,7 @@ setup: \
 install:
 
 dependency/tamakiii-sandbox/init-symfony: dependency/cellar/tamakiii-sandbox/init-symfony-$(VERSION) | dependency/tamakiii-sandbox
-	bin/ln $< $@
+	bin/ln -s $< $@
 
 dependency/cellar/tamakiii-sandbox/init-symfony-$(VERSION): | dependency/cellar/tamakiii-sandbox
 	git clone git@github.com:$(notdir $|)/$(notdir $@).git $@

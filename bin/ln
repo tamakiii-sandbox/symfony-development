@@ -1,5 +1,63 @@
 #!/bin/bash
 
+ARGS=()
+OPTIONS=()
+
+while [[ $# -gt 0 ]]; do
+  case $1 in
+    -F)
+      OPTIONS+=("$1")
+      shift
+      ;;
+    -L)
+      OPTIONS+=("$1")
+      shift
+      ;;
+    -P)
+      OPTIONS+=("$1")
+      shift
+      ;;
+    -f)
+      OPTIONS+=("$1")
+      shift
+      ;;
+    -h)
+      OPTIONS+=("$1")
+      shift
+      ;;
+    -i)
+      OPTIONS+=("$1")
+      shift
+      ;;
+    -n)
+      OPTIONS+=("$1")
+      shift
+      ;;
+    -s)
+      OPTIONS+=("$1")
+      shift
+      ;;
+    -w)
+      OPTIONS+=("$1")
+      shift
+      ;;
+    -v)
+      OPTIONS+=("$1")
+      shift
+      ;;
+    -*|--*)
+      echo "Unknown option $1"
+      exit 1
+      ;;
+    *)
+      ARGS+=("$1")
+      shift
+      ;;
+  esac
+done
+
+set -- "${ARGS[@]}"
+
 OVERLAP=$(dirname $2)
 RELATIVE=
 while [ "${1#$OVERLAP}" = "$1" ]; do
@@ -7,4 +65,4 @@ while [ "${1#$OVERLAP}" = "$1" ]; do
   RELATIVE="../${RELATIVE}"
 done
 
-cd $(dirname $2) && ln -fs ${RELATIVE}${1#$OVERLAP/} $(basename $2)
+cd $(dirname $2) && ln ${OPTIONS} ${RELATIVE}${1#$OVERLAP/} $(basename $2)
