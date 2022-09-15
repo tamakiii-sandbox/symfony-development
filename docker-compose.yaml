@@ -8,3 +8,5 @@ services:
     working_dir: /app/tamakiii-sandbox/init-symfony
     volumes:
       - ./dependency/tamakiii-sandbox/init-symfony:/app/tamakiii-sandbox/init-symfony:${MOUNT_TYPE:-delegated}
+    ports:
+      - 80:8000

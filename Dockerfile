@@ -44,3 +44,5 @@ RUN curl -1sLf 'https://dl.cloudsmith.io/public/symfony/stable/setup.rpm.sh' | b
 RUN git config --global user.email "tamakiii@users.noreply.github.com" && \
     git config --global user.name "tamakiii" && \
     composer config --global --no-plugins allow-plugins.symfony/flex true
+
+CMD ["symfony", "local:server:start"]
