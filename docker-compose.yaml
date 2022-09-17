@@ -4,7 +4,8 @@ services:
     build:
       context: .
       args:
-        VERSION: ${VERSION:-81}
+        PHP_VERSION: ${PHP_VERSION:-81}
+        COMPOSER_VERSION: ${COMPOSER_VERSION:-2.4.2}
     working_dir: /app/tamakiii-sandbox/init-symfony
     volumes:
       - ./dependency/tamakiii-sandbox/init-symfony:/app/tamakiii-sandbox/init-symfony:${MOUNT_TYPE:-delegated}
