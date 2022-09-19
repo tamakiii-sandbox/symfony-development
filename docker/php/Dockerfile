@@ -38,7 +38,7 @@ RUN yum update -y && \
     yum clean all && \
     rm -rf /var/cache/yum/*
 
-RUN ln -s /opt/remi/php72/root/usr/sbin/php-fpm /usr/sbin/php${PHP_VERSION}-fpm && \
+RUN ln -s /opt/remi/php${PHP_VERSION}/root/usr/sbin/php-fpm /usr/sbin/php${PHP_VERSION}-fpm && \
     alternatives --install /usr/bin/php php /usr/bin/php${PHP_VERSION} 1 && \
     alternatives --install /usr/bin/php-fpm php-fpm /usr/sbin/php${PHP_VERSION}-fpm 1
 
@@ -60,7 +60,7 @@ RUN userdel apache
 RUN ln -s /dev/stderr /var/opt/remi/php${PHP_VERSION}/log/php-fpm/error.log && \
     ln -s /dev/stderr /var/opt/remi/php${PHP_VERSION}/log/php-fpm/www.access.log
 
-COPY docker/php/etc/opt/remi/php72/php-fpm.conf /etc/opt/remi/php72/php-fpm.conf
-COPY docker/php/etc/opt/remi/php72/php-fpm.d/www.conf /etc/opt/remi/php72/php-fpm.d/www.conf
+COPY etc/opt/remi/php00/php-fpm.conf /etc/opt/remi/php${PHP_VERSION}/php-fpm.conf
+COPY etc/opt/remi/php00/php-fpm.d/www.conf /etc/opt/remi/php${PHP_VERSION}/php-fpm.d/www.conf
 
 CMD ["php-fpm", "--nodaemonize", "--allow-to-run-as-root"]

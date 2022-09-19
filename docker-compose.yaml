@@ -2,7 +2,7 @@ version: "3.9"
 services:
   php:
     build:
-      context: .
+      context: docker/php
       args:
         PHP_VERSION: ${PHP_VERSION:-81}
         COMPOSER_VERSION: ${COMPOSER_VERSION:-2.4.2}
