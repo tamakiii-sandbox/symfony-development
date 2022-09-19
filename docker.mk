@@ -19,5 +19,4 @@ install: | dependency/tamakiii-sandbox/init-symfony
 	docker-compose run --rm php composer install
 
 clean:
-	rm -rf dependency/tamakiii-sandbox/init-symfony/vendor
 	docker-compose down -v --remove-orphans
