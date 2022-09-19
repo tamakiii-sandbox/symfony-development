@@ -3,6 +3,7 @@ services:
   php:
     build:
       context: docker/php
+      target: ${TARGET:-development}
       args:
         PHP_VERSION: ${PHP_VERSION:-81}
         COMPOSER_VERSION: ${COMPOSER_VERSION:-2.4.2}

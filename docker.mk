@@ -2,6 +2,7 @@
 
 PHP_VERSION := 81
 COMPOSER_VERSION := 2.4.2
+TARGET := development
 # old: 2.2.9
 
 help:
@@ -12,6 +13,7 @@ setup: \
 
 build:
 	docker-compose build \
+		--build-arg TARGET=$(TARGET) \
 		--build-arg PHP_VERSION=$(PHP_VERSION) \
 		--build-arg COMPOSER_VERSION=$(COMPOSER_VERSION)
 

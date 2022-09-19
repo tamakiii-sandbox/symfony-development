@@ -71,8 +71,9 @@ FROM development AS debug
 
 RUN yum update -y && \
     yum install -y \
-      php${PHP_VERSION}-php-pecl-xdebug3 \
+      php${PHP_VERSION}-php-pecl-xdebug \
       && \
     yum clean all && \
     rm -rf /var/cache/yum/*
 
+COPY opt/remi/php00/root/usr/share/doc/pecl/xdebug/xdebug.ini /opt/remi/php${PHP_VERSION}/root/usr/share/doc/pecl/xdebug/xdebug.ini
