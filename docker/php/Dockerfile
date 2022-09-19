@@ -1,4 +1,4 @@
-FROM amazonlinux:2.0.20220719.0
+FROM amazonlinux:2.0.20220719.0 AS development
 
 ARG PHP_VERSION
 ARG COMPOSER_VERSION
@@ -64,3 +64,15 @@ COPY etc/opt/remi/php00/php-fpm.conf /etc/opt/remi/php${PHP_VERSION}/php-fpm.con
 COPY etc/opt/remi/php00/php-fpm.d/www.conf /etc/opt/remi/php${PHP_VERSION}/php-fpm.d/www.conf
 
 CMD ["php-fpm", "--nodaemonize", "--allow-to-run-as-root"]
+
+# --
+
+FROM development AS debug
+
+RUN yum update -y && \
+    yum install -y \
+      php${PHP_VERSION}-php-pecl-xdebug3 \
+      && \
+    yum clean all && \
+    rm -rf /var/cache/yum/*
+
