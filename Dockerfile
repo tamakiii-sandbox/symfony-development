@@ -57,8 +57,8 @@ RUN git config --global user.email "tamakiii@users.noreply.github.com" && \
 RUN mkdir /var/log/php-fpm
 RUN userdel apache
 
-RUN ln -s /dev/stderr /var/opt/remi/php72/log/php-fpm/error.log && \
-    ln -s /dev/stderr /var/opt/remi/php72/log/php-fpm/www.access.log
+RUN ln -s /dev/stderr /var/opt/remi/php${PHP_VERSION}/log/php-fpm/error.log && \
+    ln -s /dev/stderr /var/opt/remi/php${PHP_VERSION}/log/php-fpm/www.access.log
 
 COPY docker/php/etc/opt/remi/php72/php-fpm.conf /etc/opt/remi/php72/php-fpm.conf
 COPY docker/php/etc/opt/remi/php72/php-fpm.d/www.conf /etc/opt/remi/php72/php-fpm.d/www.conf
