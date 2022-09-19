@@ -10,13 +10,14 @@ help:
 setup: \
 	build
 
-install:
-	docker-compose run --rm php composer install
-
 build:
 	docker-compose build \
 		--build-arg PHP_VERSION=$(PHP_VERSION) \
 		--build-arg COMPOSER_VERSION=$(COMPOSER_VERSION)
 
+install: | dependency/tamakiii-sandbox/init-symfony
+	docker-compose run --rm php composer install
+
 clean:
-	docker-compose down -v
+	rm -rf dependency/tamakiii-sandbox/init-symfony/vendor
+	docker-compose down -v --remove-orphans
