@@ -60,8 +60,8 @@ RUN userdel apache
 RUN ln -s /dev/stderr /var/opt/remi/php${PHP_VERSION}/log/php-fpm/error.log && \
     ln -s /dev/stderr /var/opt/remi/php${PHP_VERSION}/log/php-fpm/www.access.log
 
-COPY etc/opt/remi/php00/php-fpm.conf /etc/opt/remi/php${PHP_VERSION}/php-fpm.conf
-COPY etc/opt/remi/php00/php-fpm.d/www.conf /etc/opt/remi/php${PHP_VERSION}/php-fpm.d/www.conf
+COPY etc/opt/remi/php${PHP_VERSION}/php-fpm.conf /etc/opt/remi/php${PHP_VERSION}/php-fpm.conf
+COPY etc/opt/remi/php${PHP_VERSION}/php-fpm.d/www.conf /etc/opt/remi/php${PHP_VERSION}/php-fpm.d/www.conf
 
 CMD ["php-fpm", "--nodaemonize", "--allow-to-run-as-root"]
 
