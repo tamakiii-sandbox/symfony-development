@@ -20,13 +20,16 @@ RUN yum update -y && \
       php${PHP_VERSION}-php-intl \
       php${PHP_VERSION}-php-pdo \
       php${PHP_VERSION}-php-opcache \
+      php${PHP_VERSION}-php-fpm \
       which \
       less \
       make \
       git \
       unzip
 
-RUN alternatives --install /usr/bin/php php /usr/bin/php${PHP_VERSION} 1
+RUN ln -s /opt/remi/php72/root/usr/sbin/php-fpm /usr/sbin/php${PHP_VERSION}-fpm && \
+    alternatives --install /usr/bin/php php /usr/bin/php${PHP_VERSION} 1 && \
+    alternatives --install /usr/bin/php-fpm php-fpm /usr/sbin/php${PHP_VERSION}-fpm 1
 
 RUN php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" && \
     php -r "if (hash_file('sha384', 'composer-setup.php') === '55ce33d7678c5a611085589f1f3ddf8b3c52d662cd01d4ba75c0ee0459970c2200a51f492d557530c71c15d8dba01eae') { echo 'Installer verified'; } else { echo 'Installer corrupt'; unlink('composer-setup.php'); } echo PHP_EOL;" && \
@@ -40,4 +43,6 @@ RUN git config --global user.email "tamakiii@users.noreply.github.com" && \
     git config --global user.name "tamakiii" && \
     composer config --global --no-plugins allow-plugins.symfony/flex true
 
-CMD ["symfony", "local:server:start"]
+COPY docker/php/etc/opt/remi/php72/php-fpm.d/www.conf /etc/opt/remi/php72/php-fpm.d/www.conf
+
+CMD ["php-fpm", "--nodaemonize"]
