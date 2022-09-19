@@ -9,8 +9,13 @@ services:
     working_dir: /app/tamakiii-sandbox/init-symfony
     volumes:
       - ./dependency/tamakiii-sandbox/init-symfony:/app/tamakiii-sandbox/init-symfony:${MOUNT_TYPE:-delegated}
+
+  nginx:
+    build:
+      context: docker/nginx
     ports:
-      - 80:8000
+      - 80:80
+      - 443:443
 
   mysql:
     build:
