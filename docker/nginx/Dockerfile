@@ -2,11 +2,18 @@ FROM amazonlinux:2.0.20220719.0
 
 RUN yum update -y && \
     yum install -y \
+      yum-utils \
+      shadow-utils \
+      net-tools \
+      fcgi \
       procps \
       which \
-      less \
-      && \
-    amazon-linux-extras install -y nginx1 && \
+      less
+
+RUN groupadd --gid 998 nginx && \
+    useradd --gid nginx --uid 999 nginx
+
+RUN amazon-linux-extras install -y nginx1 && \
     yum clean all && \
     rm -rf /var/cache/yum/*
 
