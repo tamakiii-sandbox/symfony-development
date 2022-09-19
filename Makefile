@@ -6,10 +6,10 @@ help:
 	@cat $(firstword $(MAKEFILE_LIST))
 
 setup: \
-	dependency/cellar/tamakiii-sandbox/init-symfony-$(VERSION) \
-	dependency/tamakiii-sandbox/init-symfony
+	dependency/cellar/tamakiii-sandbox/init-symfony-$(VERSION)
 
-install:
+install: \
+	dependency/tamakiii-sandbox/init-symfony
 
 dependency/tamakiii-sandbox/init-symfony: dependency/cellar/tamakiii-sandbox/init-symfony-$(VERSION) | dependency/tamakiii-sandbox
 	bin/ln -s $< $@
