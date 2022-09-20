@@ -1,0 +1,35 @@
+version: "3.9"
+services:
+  php:
+    build:
+      context: docker/php
+      target: ${TARGET:-development}
+      args:
+        PHP_VERSION: ${PHP_VERSION:-81}
+        COMPOSER_VERSION: ${COMPOSER_VERSION:-2.4.2}
+    working_dir: /app/tamakiii-sandbox/init-symfony
+    volumes:
+      - ./dependency/tamakiii-sandbox/init-symfony:/app/tamakiii-sandbox/init-symfony:${MOUNT_TYPE:-delegated}
+
+  nginx:
+    build:
+      context: docker/nginx
+    volumes:
+      - ./dependency/tamakiii-sandbox/init-symfony:/app/tamakiii-sandbox/init-symfony:${MOUNT_TYPE:-delegated}
+    ports:
+      - 80:80
+      - 443:443
+
+  mysql:
+    build:
+      context: docker/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:-password}
+      MYSQL_DATABASE: ${MYSQL_DATABASE:-symfony}
+      MYSQL_USER: ${MYSQL_USER:-user}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD:-}
+    volumes:
+      - mysql_data:/var/lib/postgresql/data:rw
+
+volumes:
+  mysql_data:

@@ -1,0 +1,10 @@
+#!/bin/bash
+
+OVERLAP=$2
+RELATIVE=
+while [ "${1#$OVERLAP}" = "$1" ]; do
+  OVERLAP=$(dirname $OVERLAP)
+  RELATIVE="../${RELATIVE}"
+done
+
+echo ${RELATIVE}${1#$OVERLAP/}

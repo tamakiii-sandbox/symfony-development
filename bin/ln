@@ -1,0 +1,66 @@
+#!/bin/bash
+
+ARGS=()
+OPTIONS=()
+
+while [[ $# -gt 0 ]]; do
+  case $1 in
+    -F)
+      OPTIONS+=("$1")
+      shift
+      ;;
+    -L)
+      OPTIONS+=("$1")
+      shift
+      ;;
+    -P)
+      OPTIONS+=("$1")
+      shift
+      ;;
+    -f)
+      OPTIONS+=("$1")
+      shift
+      ;;
+    -h)
+      OPTIONS+=("$1")
+      shift
+      ;;
+    -i)
+      OPTIONS+=("$1")
+      shift
+      ;;
+    -n)
+      OPTIONS+=("$1")
+      shift
+      ;;
+    -s)
+      OPTIONS+=("$1")
+      shift
+      ;;
+    -w)
+      OPTIONS+=("$1")
+      shift
+      ;;
+    -v)
+      OPTIONS+=("$1")
+      shift
+      ;;
+    -*|--*)
+      echo "Unknown option $1"
+      exit 1
+      ;;
+    *)
+      ARGS+=("$1")
+      shift
+      ;;
+  esac
+done
+
+set -- "${ARGS[@]}"
+
+CURDIR=$(cd $(dirname $0) && pwd)
+DIRECTORY=$(dirname $2)
+FILENAME=$(basename $2)
+RELATIVE=$($CURDIR/relative $1 ${DIRECTORY})
+
+cd ${DIRECTORY} && ln ${OPTIONS} ${RELATIVE} ${FILENAME}
