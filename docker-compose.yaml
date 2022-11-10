@@ -7,6 +7,7 @@ services:
       args:
         PHP_VERSION: ${PHP_VERSION:-81}
         COMPOSER_VERSION: ${COMPOSER_VERSION:-2.4.2}
+    platform: ${ARCHITECTURE:-linux/amd64}
     working_dir: /app/tamakiii-sandbox/init-symfony
     volumes:
       - ./dependency/tamakiii-sandbox/init-symfony:/app/tamakiii-sandbox/init-symfony:${MOUNT_TYPE:-delegated}
@@ -14,6 +15,7 @@ services:
   nginx:
     build:
       context: docker/nginx
+    platform: ${ARCHITECTURE:-linux/amd64}
     volumes:
       - ./dependency/tamakiii-sandbox/init-symfony:/app/tamakiii-sandbox/init-symfony:${MOUNT_TYPE:-delegated}
     ports:
@@ -23,6 +25,7 @@ services:
   mysql:
     build:
       context: docker/mysql
+    platform: ${ARCHITECTURE:-linux/amd64}
     environment:
       MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:-password}
       MYSQL_DATABASE: ${MYSQL_DATABASE:-symfony}
